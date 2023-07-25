@@ -11,7 +11,7 @@ class Products {
     return prods;
   }
 
-  async searchProds(search, filter, page, limit) {
+  async searchProds(search = '', filter = 'asc', page = 1, limit = 10) {
 
     const sort = filter === "asc" ? "asc" : "desc"; // Si price es "asc", ordena de forma ascendente, de lo contrario, ordena de forma descendente
 
