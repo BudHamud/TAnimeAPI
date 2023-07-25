@@ -7,9 +7,21 @@ class Products {
   }
 
   async addProds(prods) {
-    const myProds = await productsModel.insertMany(prods)
-    return myProds
-  }
+    try {
+      const parsedProds = JSON.parse(prods);
+  
+      if (!Array.isArray(parsedProds)) {
+        const myProds = new productsModel(parsedProds);
+        await myProds.save();
+        return myProds;
+      }
+  
+      const myProds = await productsModel.insertMany(parsedProds);
+      return myProds;
+    } catch (error) {
+      throw error;
+    }
+  }  
 
   async searchProds(search = '', filter = 'asc', page = 1, limit = 10) {
 
