@@ -6,9 +6,9 @@ class Products {
     return prods;
   }
 
-  async getProds() {
-    const prods = await productsModel.find();
-    return prods;
+  async addProds(prods) {
+    const myProds = await productsModel.insertMany(prods)
+    return myProds
   }
 
   async searchProds(search = '', filter = 'asc', page = 1, limit = 10) {

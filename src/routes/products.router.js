@@ -13,13 +13,22 @@ router.get("/", async (req, res) => {
 
     res.status(200).json(searchResults);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+  } catch (err) {
+    console.error(error);
+  }
+});
+
 router.post("/", async (req, res) => {
-  const prod = pm.addProd(req.body);
+  const prod = await pm.addProds(req.body)
   res.json(prod);
 });
 
