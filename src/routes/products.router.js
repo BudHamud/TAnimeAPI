@@ -22,13 +22,15 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
+    const prod = await pm.getProdById(id)
+    res.status(200).json(prod)
   } catch (err) {
-    console.error(error);
+    console.error(err);
   }
 });
 
 router.post("/", async (req, res) => {
-  const prod = await pm.addProds(req.body)
+  const prod = await pm.addProds()
   res.json(prod);
 });
 
