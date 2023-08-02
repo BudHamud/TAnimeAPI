@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const prod = await pm.addProds()
+  const prod = await pm.addProds(req.body)
   res.json(prod);
 });
 
