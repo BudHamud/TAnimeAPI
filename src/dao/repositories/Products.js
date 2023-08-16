@@ -11,25 +11,23 @@ class Products {
     return prod
   }
 
-  async addProds(prod) {
+  async addProds(obj) {
     try {
-      const myProd = await productsModel.create(prod)
+      const myProd = await productsModel.create(obj)
       return myProd;
     } catch (error) {
       throw error;
     }
   }
 
-  async searchProds(search = "", filter = "asc", page = 1, limit = 10) {
-    const sort = filter === "asc" ? "asc" : "desc"; // Si price es "asc", ordena de forma ascendente, de lo contrario, ordena de forma descendente
-
+  async searchProds(search = "", filter = '', page = 1, limit = 10, order = 'asc') {
     const options = {
-      sort: { price: sort },
+      sort: { price: order },
       limit: parseInt(limit),
       page: parseInt(page),
     };
 
-    const searchQuery = { name: { $regex: search, $options: "i" } };
+    const searchQuery = filter !== '' ? { category: filter } : { name: { $regex: search, $options: "i" } };
 
     const searchResults = await productsModel.paginate(searchQuery, options);
 

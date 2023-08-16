@@ -6,10 +6,10 @@ const pm = new Product();
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const { search, filter, page, limit } = req.query;
+  const { search, filter, page, limit, order } = req.query;
 
   try {
-    const searchResults = await pm.searchProds(search, filter, page, limit);
+    const searchResults = await pm.searchProds(search, filter, page, limit, order);
 
     res.status(200).json(searchResults);
   } catch (error) {
@@ -22,15 +22,16 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const prod = await pm.getProdById(id)
-    res.status(200).json(prod)
+    const prod = await pm.getProdById(id);
+    res.status(200).json(prod);
   } catch (err) {
     console.error(err);
   }
 });
 
 router.post("/", async (req, res) => {
-  const prod = await pm.addProds(req.body)
+
+  const prod = await pm.addProds(req.body);
   res.json(prod);
 });
 
